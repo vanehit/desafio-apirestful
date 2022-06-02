@@ -1,4 +1,6 @@
-const express = require('express');
+
+
+const router = express.Router();
 
 const Contenedor = require('./contenedor')
 
@@ -16,15 +18,17 @@ app.use(express.json())
 
 app.use(express.urlencoded({extended: true}))
 
+app.get( '/', ( req, res ) => {
+    res.sendFile( __dirname + '/public/index.html' )
+});
 
-
-  app.get('/api/Products', (req, res) => {
+  router.get('/api/Products', (req, res) => {
       const data = contenedor.getAll()
 
       res.json(data);
   });
 
-  app.get('/api/Products/:id', async (req, res) => { {}
+  router.get('/api/Products/:id', async (req, res) => { {}
     try{
         const data = await contenedor.getAllPromise()
 
@@ -40,20 +44,24 @@ app.use(express.urlencoded({extended: true}))
 
 })
 
-app.post('/api/Products', (req, res) => {
+router.post('/api/Products', (req, res) => {
     const newData = req.body
     console.log(newData)
     contenedor.save(newData)
 
     res.send("Se registro satisfactoriamente")
-
 })
 
-app.put('/api/Products/:id', (req, res) => {
+router.put('/api/Products/:id', (req, res) => {
+    const user = getUser(req.params.userId)
 
+    if (!user) return res.status(404).json({})
+   
+    user.name = req.body.name
+    res.json(user)
 })
 
-app.delete('/api/Products/:id', (req, res) => {
+router.delete('/api/Products/:id', (req, res) => {
     const id = Number(req.params.id)
     contenedor.deleteById(id)
 
