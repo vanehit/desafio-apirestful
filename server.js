@@ -53,12 +53,12 @@ router.post('/api/Products', (req, res) => {
 })
 
 router.put('/api/Products/:id', (req, res) => {
-    const user = getUser(req.params.userId)
+    const product = getProduct(req.params.productId)
 
-    if (!user) return res.status(404).json({})
+    if (!product) return res.status(404).json({})
    
     user.name = req.body.name
-    res.json(user)
+    res.json(product)
 })
 
 router.delete('/api/Products/:id', (req, res) => {
