@@ -1,6 +1,6 @@
 const express = require( 'express' );
 
-const router = express.Router();
+const { Router } = express
 
 const Contenedor = require('./contenedor')
 
@@ -12,14 +12,16 @@ const PORT = process.env.PORT || 8080
 
 const app = express();
 
+const router = express.Router();
+
 const contenedor = new Contenedor(DBfile)
 
 app.use(express.json())
 
 app.use(express.urlencoded({extended: true}))
 
-app.get( '/', ( req, res ) => {
-    res.sendFile( __dirname + '/public/index.html' )
+app.get('/', ( req, res ) => {
+    res.sendFile( __dirname + '/public/index.html')
 });
 
   router.get('/api/Products', (req, res) => {
@@ -32,11 +34,12 @@ app.get( '/', ( req, res ) => {
     try{
         const data = await contenedor.getAllPromise()
 
-        const numero = Math.floor(Math.random() * data.length)
+        const numero = Math.floor(Math.getById() * data.length)
         
         const item = data[numero]
 
         res.json(item)
+        
     } catch (e) {
         res.status(500)
         res.send(e)
@@ -53,12 +56,12 @@ router.post('/api/Products', (req, res) => {
 })
 
 router.put('/api/Products/:id', (req, res) => {
-    const product = getProduct(req.params.productId)
+    const products = getProducts(req.params.productsId)
 
-    if (!product) return res.status(404).json({})
+    if (!products) return res.status(404).json({})
    
-    user.name = req.body.name
-    res.json(product)
+    products.name = req.body.name
+    res.json(products)
 })
 
 router.delete('/api/Products/:id', (req, res) => {
@@ -67,6 +70,8 @@ router.delete('/api/Products/:id', (req, res) => {
 
     res.send('Eliminado satisfactoriamente')
 })
+
+app.use('/api/Products', router);
 
 const server = app.listen(PORT, () => console.log(`Listening ${PORT} ...`))
 server.on('error', e => {
