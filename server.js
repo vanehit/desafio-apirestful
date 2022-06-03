@@ -1,77 +1,32 @@
+//Imports
 const express = require( 'express' );
+const productsRouter = require('./routes/productsRouter')
 
-const { Router } = express
 
-const Contenedor = require('./contenedor')
 
-let DBfile = "./Products.json";
-
-const fs = require('fs');
-
-const PORT = process.env.PORT || 8080
-
+//inicializar express
 const app = express();
 
-const router = express.Router();
 
-const contenedor = new Contenedor(DBfile)
+//setting
+const PORT = process.env.PORT || 8080
 
+
+//middlewares
+//json codifica el body
 app.use(express.json())
-
 app.use(express.urlencoded({extended: true}))
 
+
+app.use('/Products', productsRouter);
+
+
+//routes
 app.get('/', ( req, res ) => {
-    res.sendFile( __dirname + '/public/index.html')
+    res.send({message: 'Server running ok' });
 });
 
-  router.get('/api/Products', (req, res) => {
-      const data = contenedor.getAll()
-
-      res.json(data);
-  });
-
-  router.get('/api/Products/:id', async (req, res) => { {}
-    try{
-        const data = await contenedor.getAllPromise()
-
-        const numero = Math.floor(Math.getById() * data.length)
-        
-        const item = data[numero]
-
-        res.json(item)
-        
-    } catch (e) {
-        res.status(500)
-        res.send(e)
-    }
-
-})
-
-router.post('/api/Products', (req, res) => {
-    const newData = req.body
-    console.log(newData)
-    contenedor.save(newData)
-
-    res.send("Se registro satisfactoriamente")
-})
-
-router.put('/api/Products/:id', (req, res) => {
-    const products = getProducts(req.params.productsId)
-
-    if (!products) return res.status(404).json({})
-   
-    products.name = req.body.name
-    res.json(products)
-})
-
-router.delete('/api/Products/:id', (req, res) => {
-    const id = Number(req.params.id)
-    contenedor.deleteById(id)
-
-    res.send('Eliminado satisfactoriamente')
-})
-
-app.use('/api/Products', router);
+ 
 
 const server = app.listen(PORT, () => console.log(`Listening ${PORT} ...`))
 server.on('error', e => {
