@@ -30,7 +30,7 @@ router.get('/:id', async (req, res)=>{
     const products = await products.getById(idNumber);
 
     if (!products) {
-        return res.status(400).send({ error: `La persona con el id: ${id} no existe` });
+        return res.status(400).send({ error: `La producto con el id: ${id} no existe` });
     }
 
     return res.send(products)
@@ -39,7 +39,7 @@ router.get('/:id', async (req, res)=>{
 router.post('/', async (req, res)=>{
     const { name, title, price, thumbnail } = req.body;
 
-    if (!name || !title || !price || !thumbnail) {
+    if ( !name || !title || !price || !thumbnail) {
         return res.status(400).send({ error: 'Los datos están incompletos' });
     }
 

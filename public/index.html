@@ -7,16 +7,20 @@
     <title>desafio apirestful</title>
 </head>
 <body>
-    <div></div>
+    <div>
         <form id="formProducts" action="/api/Products" method="POST" >
-            <label for="title">Nombre del producto</label>
-            <input type="text" name="title"><br><br>
-            <label for="price">Precio</label>
-            <input type="text" name="price"><br><br>
-            <label for="thumbnail">Url de la img</label>
+            <label for="name">name</label>
+            <input type="text" name="name"><br><br>
+            <label for="title">Title</label>
+            <input type="number" title="title"><br><br>
+            <label for="price">Price</label>
+            <input type="number" name="price"><br><br>
+            <label for="thumbnail">thumbnail</label>
             <input type="text" name="thumbnail"><br><br>
-            <input type="submit" >
+            <button type="submit">
+                Enviar
+            </button>
         </form>
-    
+    </div>
 </body>
 </html>

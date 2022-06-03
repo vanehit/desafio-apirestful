@@ -16,9 +16,8 @@ const PORT = process.env.PORT || 8080
 //json codifica el body
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
-
-app.use('/Products', productsRouter);
+app.use('/static', express.static('public'))
+app.use('/api/Products', productsRouter);
 
 
 //routes
