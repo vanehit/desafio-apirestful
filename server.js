@@ -4,9 +4,9 @@ const productsRouter = require('./routes/productsRouter')
 
 
 
+
 //inicializar express
 const app = express();
-
 
 //setting
 const PORT = process.env.PORT || 8080
@@ -16,8 +16,13 @@ const PORT = process.env.PORT || 8080
 //json codifica el body
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use('/static', express.static('public'))
 app.use('/api/Products', productsRouter);
+
+
+
+
+app.set( 'view engine', 'ejs' );
+app.set( 'views', __dirname + '/views' );
 
 
 //routes
