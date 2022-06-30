@@ -29,6 +29,7 @@ app.set( 'views', __dirname + '/views' );
 
 //websockets:
 let date = new Date();
+
 const messages = [
   { author: 'vanesasoria.com@gmail.com', msg: 'Hola mundo!', date: date.toISOString().split('T')[0] + ' ' + date.toLocaleTimeString() },
   { author: 'example@gmail.com', msg: 'Hola mundo!', date: date.toISOString().split('T')[0] + ' ' + date.toLocaleTimeString() }

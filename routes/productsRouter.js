@@ -3,6 +3,8 @@ const { Router } = require('express');
 
 const Contenedor = require('../contenedor');
 
+const contenedorbd = require('../contenedor_bd');
+
 const products = new Contenedor('Products.json');
 
 const Messages = new Contenedor('messages.json')
