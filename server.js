@@ -6,6 +6,7 @@ const fs = require('fs')
 const { Server } = require("socket.io");
 const http = require( 'http' );
 
+const sqlite = require( './contenedor_messages' );
 
 //inicializar express
 const app = express();

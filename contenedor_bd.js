@@ -1,7 +1,11 @@
+
+const options = require('./options/mysql')
+const knex = require('knex')( options );
+
 class contenedorbd {
 
-    constructor(filename) {
-        this.archivo = filename;
+    constructor(options) {
+        this.archivo = options;
         this.data = [];
         const knex = require('knex')({
             client: 'mysql',
@@ -9,7 +13,8 @@ class contenedorbd {
                 host: '127.0.0.1',
                 user: 'root',
                 password: 'secret',
-                database: 'mibase'
+                database: 'mibase',
+                table: 'Products'
             }
         })
 
@@ -18,7 +23,6 @@ class contenedorbd {
             table.string('title')
             table.integer('price')
             table.string('thumbnail')
-            table.integer('stock')
         })
             .then(() => console.log("table created"))
             .catch(err => { console.log(err); throw err })
@@ -31,7 +35,7 @@ class contenedorbd {
         await knex.from('products').select('*')
             .then(rows => {
                 for (const row of rows) {
-                    console.log(`${row['id']}: ${row['title']} ${row['price']} ${row['thumbnail']} (${row['stock']}) `)
+                    console.log(`${row['id']}: ${row['title']} ${row['price']} ${row['thumbnail']} `)
                 }
                 console.log(rows)
             })
@@ -64,6 +68,7 @@ class contenedorbd {
             .finally(() => knex.destroy())
       } 
 }
+
 
 
 module.exports = contenedorbd

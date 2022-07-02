@@ -5,9 +5,13 @@ const Contenedor = require('../contenedor');
 
 const contenedorbd = require('../contenedor_bd');
 
+const Contenedor_messages = require('../contenedor_messages');
+
 const products = new Contenedor('Products.json');
 
-const Messages = new Contenedor('messages.json')
+const Messages = new Contenedor_messages('messages.json')
+
+const database = new contenedorbd ('../contenedor_bd.js')
 
 
 const router = Router();

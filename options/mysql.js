@@ -4,7 +4,8 @@ const options = {
         host: '127.0.0.1',
         user: 'root',
         password: 'secret',
-        database: 'mibase'
+        database: 'mibase',
+        table:'Products'
     }
 }
 
